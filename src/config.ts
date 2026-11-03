@@ -5,6 +5,7 @@ export const site = {
   url: 'https://thawin-seri.github.io',
   locale: 'en', // BCP 47, e.g. 'en', 'ko'
   author: 'Thawin Serivivatanavongse',
+  quote: { text: 'The unexamined life is not worth living.', by: 'Socrates' }, // shown under your name on the home page
   defaultOgImage: '/og-default.jpg', // the card for every page without one of its own
 } as const;
 
