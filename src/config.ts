@@ -2,7 +2,7 @@
 export const site = {
   name: 'Vitrine',
   description: 'A catalogue of objects, plate by plate.',
-  url: 'https://example.com',
+  url: 'https://thawin-seri.github.io',
   locale: 'en', // BCP 47, e.g. 'en', 'ko'
   author: 'Ada Example', // Fictional demo author. Replace with your name
   defaultOgImage: '/og-default.jpg', // the card for every page without one of its own
