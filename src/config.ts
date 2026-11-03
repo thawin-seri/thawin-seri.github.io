@@ -1,7 +1,7 @@
 // src/config.ts — single entry point for site settings. Everything site-specific lives here; never hardcode in components.
 export const site = {
   name: 'Thawin Serivivatanavongse',
-  description: 'Photographs by Thawin Serivivatanavongse.',
+  description: 'Electrical engineering student designing analog and mixed-signal integrated circuits.',
   url: 'https://thawin-seri.github.io',
   locale: 'en', // BCP 47, e.g. 'en', 'ko'
   author: 'Thawin Serivivatanavongse',
@@ -11,9 +11,10 @@ export const site = {
 
 export const nav = {
   header: [
-    { label: 'Catalogue', href: '/catalogue' },
-    { label: 'Collections', href: '/collections' },
+    { label: 'Projects', href: '/projects' },
+    { label: 'Photos', href: '/collections' },
     { label: 'About', href: '/about' },
+    { label: 'Resume', href: '/resume.pdf' },
   ],
   footer: [
     {
@@ -26,7 +27,8 @@ export const nav = {
     },
   ],
   social: [
-    { label: 'GitHub', href: 'https://github.com/', icon: 'lucide:github' },
+    { label: 'LinkedIn', href: 'https://linkedin.com/in/thawin', icon: 'lucide:linkedin' },
+    { label: 'GitHub', href: 'https://github.com/thawin-seri', icon: 'lucide:github' },
     // Icons are Lucide names (https://lucide.dev/icons)
   ],
 } as const;
@@ -53,7 +55,7 @@ export const catalogue = {
   relatedPlates: 3,
   // Accession numbers are derived from catalogue order (01, 02, …) unless an
   // object sets its own. Turn off to hide them everywhere.
-  showAccession: true,
+  showAccession: false,
 };
 
 export const features = {
@@ -76,7 +78,7 @@ export const analytics = {
 // "HTML" carry a link and are printed as markup. The colophon's text is the page itself
 // (src/pages/colophon.astro).
 const n = (count: number, one: string, many: string) => `${count} ${count === 1 ? one : many}`;
-const objectWord = (count: number) => (count === 1 ? 'object' : 'objects');
+const objectWord = (count: number) => (count === 1 ? 'photo' : 'photos');
 export const ui = {
   skipToContent: 'Skip to content',
   mainNav: 'Main', // read out for the header links
@@ -84,7 +86,7 @@ export const ui = {
   theme: { system: 'System', light: 'Light', dark: 'Dark' },
   objects: (count: number) => `${count} ${objectWord(count)}`,
   objectWord, // the word alone, after a count printed apart from it
-  wholeCatalogue: 'The whole catalogue',
+  wholeCatalogue: 'All photos',
   pagination: {
     label: 'Pagination',
     back: '← Back',
@@ -93,35 +95,33 @@ export const ui = {
   },
   home: {
     count: (objects: number, collections: number) =>
-      `${n(objects, 'object', 'objects')}, ${n(collections, 'collection', 'collections')}`,
-    plates: 'Plates',
-    collections: 'Collections',
+      `${n(objects, 'photo', 'photos')}, ${n(collections, 'album', 'albums')}`,
+    plates: 'Photos',
+    collections: 'Albums',
   },
   catalogue: {
-    title: 'Catalogue',
-    sheet: (page: number) => `Catalogue (${page})`, // the title of sheet 2 onwards
-    description: `Every object in the ${site.name} catalogue, in catalogue order.`,
+    title: 'All photos',
+    sheet: (page: number) => `All photos (${page})`, // the title of sheet 2 onwards
+    description: `Every photograph on ${site.name}'s site.`,
     range: (first: number, last: number, total: number) => `${first}–${last} of ${total}`,
-    intro:
-      'Arranged by collection, and within a collection by date. The number under each plate is the one the archive answers to.',
+    intro: 'Arranged by album, and within an album by date.',
   },
   label: {
-    medium: 'Medium',
+    medium: 'Camera',
     date: 'Date',
     dimensions: 'Dimensions',
-    number: 'Catalogue',
+    number: 'No.',
     credit: 'Credit',
   },
-  nearby: 'Nearby in the catalogue',
+  nearby: 'More photos',
   collection: {
-    empty: 'Nothing is catalogued under this heading yet.',
-    all: '← All collections',
+    empty: 'No photos in this album yet.',
+    all: '← All albums',
   },
   collections: {
-    title: 'Collections',
-    description: `How the ${site.name} catalogue is divided, and what each division holds.`,
-    intro:
-      'The divisions are arranged, not alphabetised, and an object belongs to exactly one of them.',
+    title: 'Photos',
+    description: `Photographs by ${site.name}, by region.`,
+    intro: 'Photographs from my travels, grouped by where they were taken.',
   },
   colophon: {
     title: 'Colophon',

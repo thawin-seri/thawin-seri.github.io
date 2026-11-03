@@ -53,6 +53,24 @@ const groups = defineCollection({
     }),
 });
 
+// Engineering projects. One file per project in src/content/projects.
+const projects = defineCollection({
+  loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      summary: z.string(), // one or two sentences, shown on the project list
+      dateText: z.string(), // shown as written, e.g. "Summer 2026" or "Fall 2026 – present"
+      role: z.string().optional(), // e.g. "Engineering intern", "Power subsystem lead"
+      tags: z.array(z.string()).default([]),
+      image: image().optional(),
+      links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
+      order: z.number().int().optional(), // lower comes first
+      featured: z.boolean().default(true), // shown on the home page
+      draft: z.boolean().default(false),
+    }),
+});
+
 // The key is the collection name used everywhere else, so `groups` is only the
 // local binding: `collections` is taken by Astro's own export.
-export const collections = { objects, collections: groups };
+export const collections = { objects, collections: groups, projects };

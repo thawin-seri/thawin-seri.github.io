@@ -94,3 +94,17 @@ export async function getRelatedPlates(
 export async function getPlatesOf(group: { id: string }): Promise<Plate[]> {
   return (await getPlates()).filter((plate) => plate.group.id === group.id);
 }
+
+export type Project = CollectionEntry<'projects'>;
+
+/** Published projects, by `order` then title. */
+export async function getProjects(): Promise<Project[]> {
+  const projects = await getCollection('projects', ({ data }) => !data.draft);
+  return projects.sort(
+    (a, b) =>
+      (a.data.order ?? Number.MAX_SAFE_INTEGER) - (b.data.order ?? Number.MAX_SAFE_INTEGER) ||
+      a.data.title.localeCompare(b.data.title),
+  );
+}
+
+export const projectPath = (project: { id: string }) => `/projects/${project.id}`;

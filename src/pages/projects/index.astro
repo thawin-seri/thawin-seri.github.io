@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectList from '../../components/projects/ProjectList.astro';
+import { site } from '../../config';
+import { getProjects } from '../../lib/content';
+
+const projects = await getProjects();
+---
+
+<Base title="Projects" description={`Engineering projects by ${site.author}.`}>
+  <div class="max-w-wide mx-auto px-4 pt-14 pb-20 md:pt-20">
+    <h1 class="font-ui text-[clamp(2.25rem,6vw,3.5rem)] leading-[1.05]">Projects</h1>
+    <p class="text-muted max-w-content mt-5 text-lg">
+      Circuit design, research, and embedded systems work.
+    </p>
+    <div class="mt-12">
+      <ProjectList projects={projects} />
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,32 @@
+---
+// A ruled list of projects: date, title + summary, tags.
+import type { Project } from '../../lib/content';
+import { projectPath } from '../../lib/content';
+
+interface Props {
+  projects: Project[];
+}
+const { projects } = Astro.props;
+---
+
+<ul class="border-rule border-t">
+  {projects.map((project) => (
+    <li class="border-rule border-b">
+      <a
+        href={projectPath(project)}
+        class="group grid gap-x-8 gap-y-2 py-6 no-underline md:grid-cols-[9rem_minmax(0,1fr)_minmax(0,14rem)]"
+      >
+        <span class="text-muted text-sm tabular-nums">{project.data.dateText}</span>
+        <span>
+          <span class="font-ui group-hover:text-primary block text-xl leading-tight md:text-2xl">
+            {project.data.title}
+          </span>
+          <span class="text-muted max-w-content mt-2 block">{project.data.summary}</span>
+        </span>
+        <span class="text-muted flex flex-wrap content-start gap-x-3 gap-y-1 text-sm md:justify-end">
+          {project.data.tags.map((tag) => <span>{tag}</span>)}
+        </span>
+      </a>
+    </li>
+  ))}
+</ul>

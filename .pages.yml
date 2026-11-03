@@ -6,6 +6,64 @@ media:
   extensions: [jpg, jpeg, png, webp]
 
 content:
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      fields: [title, dateText, featured]
+      primary: title
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: summary
+        label: Summary (1–2 sentences)
+        type: text
+        required: true
+      - name: dateText
+        label: Date shown
+        description: e.g. "Summer 2026" or "Fall 2026 – present"
+        type: string
+        required: true
+      - name: role
+        label: Role
+        type: string
+      - name: tags
+        label: Tools & topics
+        type: string
+        list: true
+      - name: image
+        label: Image
+        type: image
+      - name: links
+        label: Links
+        type: object
+        list: true
+        fields:
+          - name: label
+            type: string
+          - name: href
+            label: URL
+            type: string
+      - name: order
+        label: Order (lower = first)
+        type: number
+      - name: featured
+        label: Show on home page
+        type: boolean
+        default: true
+      - name: draft
+        label: Hide (draft)
+        type: boolean
+        default: false
+      - name: body
+        label: Write-up
+        type: rich-text
+
   - name: photos
     label: Photos
     type: collection
@@ -44,9 +102,9 @@ content:
       - name: collection
         label: Album
         type: select
-        default: photos
+        default: asia
         options:
-          values: [photos]
+          values: [asia, north-america, europe]
       - name: credit
         label: Credit
         type: string

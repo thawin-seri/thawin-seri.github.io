@@ -1,0 +1,61 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getProjects } from '../../lib/content';
+
+export const getStaticPaths = (async () =>
+  (await getProjects()).map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }))) satisfies GetStaticPaths;
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { title, summary, dateText, role, tags, image, links } = project.data;
+
+const facts: [string, string][] = [
+  ['Date', dateText],
+  ...(role ? ([['Role', role]] as [string, string][]) : []),
+  ...(tags.length ? ([['Tools & topics', tags.join(', ')]] as [string, string][]) : []),
+];
+---
+
+<Base title={title} description={summary}>
+  <article class="max-w-wide mx-auto px-4 pt-14 pb-20 md:pt-20">
+    <a href="/projects" class="text-muted text-sm no-underline">← All projects</a>
+    <h1 class="font-ui mt-4 text-[clamp(2.25rem,6vw,3.5rem)] leading-[1.05]">{title}</h1>
+    <p class="text-muted max-w-content mt-5 text-lg">{summary}</p>
+
+    {image && (
+      <Image src={image} alt={title} class="border-rule mt-10 w-full border" widths={[640, 1024, 1600]} />
+    )}
+
+    <div class="mt-12 grid gap-12 md:grid-cols-[minmax(0,40rem)_minmax(0,1fr)] md:gap-16">
+      <div class="prose">
+        <Content />
+      </div>
+
+      <div>
+        <dl class="border-rule border-t text-sm">
+          {facts.map(([term, value]) => (
+            <div class="border-rule border-b py-4">
+              <dt class="font-ui text-muted">{term}</dt>
+              <dd class="mt-1">{value}</dd>
+            </div>
+          ))}
+        </dl>
+        {links.length > 0 && (
+          <ul class="mt-6 space-y-2 text-sm">
+            {links.map((link) => (
+              <li>
+                <a href={link.href}>{link.label} →</a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  </article>
+</Base>
