@@ -1,0 +1,30 @@
+---
+// About page. The text and the facts list live in src/data/about.md
+// (editable in Pages CMS under "About page").
+import Base from '../layouts/Base.astro';
+import { site } from '../config';
+import { Content, frontmatter } from '../data/about.md';
+
+const facts: { label: string; value: string }[] = frontmatter.facts ?? [];
+---
+
+<Base title="About" description={`About ${site.author}.`}>
+  <div class="max-w-wide mx-auto px-4 pt-14 pb-20 md:pt-20">
+    <h1 class="font-ui text-[clamp(2.25rem,6vw,3.5rem)] leading-[1.05]">About</h1>
+
+    <div class="mt-12 grid gap-12 md:grid-cols-[minmax(0,34rem)_minmax(0,1fr)] md:gap-16">
+      <div class="prose">
+        <Content />
+      </div>
+
+      <dl class="border-rule border-t text-sm">
+        {facts.map(({ label, value }) => (
+          <div class="border-rule border-b py-4">
+            <dt class="font-ui text-muted">{label}</dt>
+            <dd class="mt-1">{value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</Base>

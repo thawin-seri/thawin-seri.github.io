@@ -1,10 +1,10 @@
 // src/config.ts — single entry point for site settings. Everything site-specific lives here; never hardcode in components.
 export const site = {
-  name: 'Vitrine',
-  description: 'A catalogue of objects, plate by plate.',
+  name: 'Thawin Serivivatanavongse',
+  description: 'Photographs by Thawin Serivivatanavongse.',
   url: 'https://thawin-seri.github.io',
   locale: 'en', // BCP 47, e.g. 'en', 'ko'
-  author: 'Ada Example', // Fictional demo author. Replace with your name
+  author: 'Thawin Serivivatanavongse',
   defaultOgImage: '/og-default.jpg', // the card for every page without one of its own
 } as const;
 
@@ -12,7 +12,7 @@ export const nav = {
   header: [
     { label: 'Catalogue', href: '/catalogue' },
     { label: 'Collections', href: '/collections' },
-    { label: 'Colophon', href: '/colophon' },
+    { label: 'About', href: '/about' },
   ],
   footer: [
     {
@@ -31,7 +31,7 @@ export const nav = {
 } as const;
 
 export const seo = {
-  titleTemplate: '%s · Vitrine',
+  titleTemplate: '%s · Thawin Serivivatanavongse',
   twitterHandle: '',
   jsonLd: { type: 'Person' as 'Person' | 'Organization', name: site.author },
 };

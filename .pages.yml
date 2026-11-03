@@ -1,0 +1,111 @@
+# Pages CMS (https://pagescms.org) — edit the site from a web dashboard.
+media:
+  input: src/assets/objects
+  output: ../../assets/objects
+  rename: safe
+  extensions: [jpg, jpeg, png, webp]
+
+content:
+  - name: photos
+    label: Photos
+    type: collection
+    path: src/content/objects
+    format: yaml-frontmatter
+    filename: "{primary}.mdx"
+    view:
+      fields: [title, dateText, featured]
+      primary: title
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: image
+        label: Photo
+        type: image
+        required: true
+      - name: caption
+        label: Label above the photo
+        description: One or two words, e.g. "Bangkok" or "Street"
+        type: string
+        required: true
+      - name: dateText
+        label: Date shown
+        description: e.g. "March 2026"
+        type: string
+        required: true
+      - name: year
+        label: Year (for sorting)
+        type: number
+      - name: medium
+        label: Camera / lens
+        type: string
+        required: true
+      - name: collection
+        label: Album
+        type: select
+        default: photos
+        options:
+          values: [photos]
+      - name: credit
+        label: Credit
+        type: string
+      - name: span
+        label: Width in grid (1 = normal, 2 = wide)
+        type: number
+        default: 1
+        options:
+          min: 1
+          max: 2
+      - name: featured
+        label: Show on home page
+        type: boolean
+        default: false
+      - name: draft
+        label: Hide (draft)
+        type: boolean
+        default: false
+      - name: body
+        label: Story (optional)
+        type: rich-text
+
+  - name: albums
+    label: Albums
+    type: collection
+    path: src/content/collections
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    fields:
+      - name: title
+        label: Album name
+        type: string
+        required: true
+      - name: description
+        label: Description
+        type: text
+        required: true
+      - name: order
+        label: Order
+        type: number
+      - name: cover
+        label: Cover photo
+        type: image
+
+  - name: about
+    label: About page
+    type: file
+    path: src/data/about.md
+    format: yaml-frontmatter
+    fields:
+      - name: body
+        label: About text
+        type: rich-text
+      - name: facts
+        label: Facts list
+        type: object
+        list: true
+        fields:
+          - name: label
+            type: string
+          - name: value
+            type: string
