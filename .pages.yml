@@ -83,10 +83,14 @@ content:
         type: image
         required: true
       - name: caption
-        label: Place
-        description: Groups photos within an album, e.g. "Bangkok" or "Italy"
+        label: Country
+        description: Groups photos within an album, e.g. "Thailand"
         type: string
         required: true
+      - name: location
+        label: City / place
+        description: Optional, e.g. "Bangkok"
+        type: string
       - name: dateText
         label: Date shown
         description: Optional, e.g. "March 2026"

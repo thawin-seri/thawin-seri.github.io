@@ -17,14 +17,14 @@ export const getStaticPaths = (async () =>
   }))) satisfies GetStaticPaths;
 
 const { plate } = Astro.props;
-const { title, caption, dateText, medium, dimensions, credit, image } = plate.data;
+const { title, caption, location, dateText, medium, dimensions, credit, image } = plate.data;
 const { Content } = await render(plate);
 const hasNote = Boolean(plate.body?.trim());
 const related = await getRelatedPlates(plate);
 
 // The label as a museum prints it, one row per line that exists.
 const rows = [
-  [ui.label.place, caption],
+  [ui.label.place, [location, caption].filter(Boolean).join(', ')],
   [ui.label.medium, medium],
   [ui.label.date, dateText],
   [ui.label.dimensions, dimensions],
@@ -72,7 +72,7 @@ const jsonLd = [
       )}
     </p>
     <h1 class="font-ui mt-3 text-[clamp(2.25rem,6vw,3.5rem)] leading-[1.05]">{title}</h1>
-    <p class="text-muted mt-2 text-lg tabular-nums">{[caption, dateText].filter(Boolean).join(' · ')}</p>
+    <p class="text-muted mt-2 text-lg tabular-nums">{[[location, caption].filter(Boolean).join(', '), dateText].filter(Boolean).join(' · ')}</p>
 
     <PlateGrid class="mt-8">
       <figure class="plate plate--figure">

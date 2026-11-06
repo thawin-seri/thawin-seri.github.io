@@ -159,10 +159,19 @@
     gap: 0;
   }
 
-  /* The hairline ring is the rule grid, not a drop shadow. */
+  /* The rule grid: every cell draws all four edges, and each cell is pulled back by
+     one rule width so neighbours share the same pixels. Lines stay 1px and meet
+     cleanly at every corner, including beside the empty cells of a short last row. */
+  .plate-grid {
+    padding-inline-end: var(--rule-width);
+    padding-block-end: var(--rule-width);
+  }
+
   .plate-grid > * {
     background: var(--background);
-    box-shadow: 0 0 0 var(--rule-width) var(--rule);
+    border: var(--rule-width) solid var(--rule);
+    margin-inline-end: calc(-1 * var(--rule-width));
+    margin-block-end: calc(-1 * var(--rule-width));
   }
 
   /* Signature off (config.ts features.plate = false): plain spaced grid, no rules,
@@ -171,8 +180,13 @@
     gap: 1.5rem;
   }
 
+  .plate-grid.is-plain {
+    padding: 0;
+  }
+
   .plate-grid.is-plain > * {
-    box-shadow: none;
+    border: 0;
+    margin: 0;
   }
 
   .plate-grid.is-plain .plate__caption {

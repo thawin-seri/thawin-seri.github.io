@@ -21,6 +21,8 @@ const objects = defineCollection({
       image: image(),
       // The line above the cell. A label, not a sentence: "Glass", "Cabinetwork".
       caption: z.string(),
+      // City or spot within the country (the caption), shown on the photo's page.
+      location: z.string().optional(),
       // Printed as written. A catalogue dates things "ca. 1600" or "1893–96", which
       // is why the display string is the required field and the number is not.
       // Optional for photographs: an undated film roll prints the place instead.

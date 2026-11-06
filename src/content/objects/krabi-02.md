@@ -1,7 +1,8 @@
 ---
 title: 'Karst islands'
 image: '../../assets/photos/krabi/krabi-02.jpg'
-caption: 'Krabi'
+caption: 'Thailand'
+location: 'Krabi'
 medium: '35mm black-and-white film'
 collection: 'asia'
 ---

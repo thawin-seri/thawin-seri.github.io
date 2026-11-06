@@ -1,7 +1,8 @@
 ---
 title: 'Window seat'
 image: '../../assets/photos/gibsons-2/gibsons-2-08.jpg'
-caption: 'British Columbia'
+caption: 'Canada'
+location: 'Gibsons'
 medium: '35mm color film'
 collection: 'north-america'
 ---

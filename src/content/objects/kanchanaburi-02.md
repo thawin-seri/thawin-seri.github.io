@@ -1,7 +1,8 @@
 ---
 title: 'Shoreline'
 image: '../../assets/photos/kanchanaburi/kanchanaburi-02.jpg'
-caption: 'Kanchanaburi'
+caption: 'Thailand'
+location: 'Kanchanaburi'
 medium: '35mm black-and-white film'
 collection: 'asia'
 ---
