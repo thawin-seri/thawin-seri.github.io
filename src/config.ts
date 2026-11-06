@@ -2,7 +2,7 @@
 export const site = {
   name: 'Thawin Serivivatanavongse',
   description: 'Electrical engineering student designing analog and mixed-signal integrated circuits.',
-  url: 'https://thawin-seri.github.io',
+  url: 'https://thawinseri.com',
   locale: 'en', // BCP 47, e.g. 'en', 'ko'
   author: 'Thawin Serivivatanavongse',
   quote: { text: 'The unexamined life is not worth living.', by: 'Socrates' }, // shown under your name on the home page
