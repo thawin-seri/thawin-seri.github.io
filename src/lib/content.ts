@@ -35,7 +35,8 @@ export async function getPlates(): Promise<Plate[]> {
       .sort(
         (a, b) =>
           (a.data.year ?? Number.MAX_SAFE_INTEGER) - (b.data.year ?? Number.MAX_SAFE_INTEGER) ||
-          a.data.title.localeCompare(b.data.title),
+          // File order (e.g. korat-01, korat-02 …) keeps each roll in sequence.
+          a.id.localeCompare(b.id, undefined, { numeric: true }),
       )
       .map((object, i) => ({
         ...object,

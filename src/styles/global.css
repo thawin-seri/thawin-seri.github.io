@@ -220,16 +220,8 @@
     max-block-size: var(--plate-figure);
     align-self: center;
     margin-inline: auto;
-    /* Object photographs are shot on white; the plate is paper, which is not quite
-       white in dark mode. Multiply drops the photo's white into the paper instead of
-       printing a white rectangle on it, and leaves the object itself alone. */
-    mix-blend-mode: multiply;
-    /* A sweep is rarely pure white, so multiply alone still prints the edge of the
-       photograph as a pale rectangle on the paper. Fading the last tenth of the
-       image takes that edge off the way a plate is vignetted into the page; the
-       object sits well inside it. */
-    -webkit-mask-image: radial-gradient(farthest-side, #000 92%, transparent 100%);
-    mask-image: radial-gradient(farthest-side, #000 92%, transparent 100%);
+    /* Film photographs are shown whole: no multiply blend, no vignette mask (the
+       theme's defaults for objects shot on white). */
   }
 
   /* The cartellino keeps its row at all times, so revealing it shifts nothing.

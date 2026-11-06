@@ -23,7 +23,8 @@ const objects = defineCollection({
       caption: z.string(),
       // Printed as written. A catalogue dates things "ca. 1600" or "1893–96", which
       // is why the display string is the required field and the number is not.
-      dateText: z.string(),
+      // Optional for photographs: an undated film roll prints the place instead.
+      dateText: z.string().default(''),
       year: z.number().int().optional(), // sorting only; entries without it keep file order
       medium: z.string(),
       dimensions: z.string().optional(),

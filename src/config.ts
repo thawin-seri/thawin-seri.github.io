@@ -104,10 +104,11 @@ export const ui = {
     sheet: (page: number) => `All photos (${page})`, // the title of sheet 2 onwards
     description: `Every photograph on ${site.name}'s site.`,
     range: (first: number, last: number, total: number) => `${first}–${last} of ${total}`,
-    intro: 'Arranged by album, and within an album by date.',
+    intro: 'Arranged by album, and within an album by place.',
   },
   label: {
-    medium: 'Camera',
+    medium: 'Film',
+    place: 'Place',
     date: 'Date',
     dimensions: 'Dimensions',
     number: 'No.',

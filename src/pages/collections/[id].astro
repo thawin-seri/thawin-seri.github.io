@@ -17,6 +17,12 @@ export const getStaticPaths = (async () =>
   )) satisfies GetStaticPaths;
 
 const { group, plates } = Astro.props;
+
+// Within an album, photos are grouped by place (the caption), in catalogue order.
+const places = [...new Set(plates.map((plate) => plate.data.caption))].map((place) => ({
+  place,
+  plates: plates.filter((plate) => plate.data.caption === place),
+}));
 ---
 
 <Base title={group.data.title} description={group.data.description}>
@@ -27,12 +33,30 @@ const { group, plates } = Astro.props;
     </div>
     <p class="max-w-content mt-5 text-lg">{group.data.description}</p>
 
-    {plates.length > 0 ? (
-      <PlateGrid class="mt-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {plates.map((plate, i) => (
-          <Plate plate={plate} showCaption={false} priority={i < 3} lcp={i === 0} />
+    {places.length > 1 && (
+      <nav aria-label="Places" class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+        {places.map(({ place }) => (
+          <a href={`#${place.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} class="no-underline">
+            {place}
+          </a>
         ))}
-      </PlateGrid>
+      </nav>
+    )}
+
+    {plates.length > 0 ? (
+      places.map(({ place, plates: placePlates }, g) => (
+        <section id={place.toLowerCase().replace(/[^a-z0-9]+/g, '-')} class="mt-14 scroll-mt-20">
+          <div class="border-rule flex items-baseline justify-between gap-4 border-b pb-2">
+            <h2 class="font-ui text-2xl leading-tight">{place}</h2>
+            <p class="text-muted text-sm tabular-nums">{ui.objects(placePlates.length)}</p>
+          </div>
+          <PlateGrid class="mt-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {placePlates.map((plate, i) => (
+              <Plate plate={plate} showCaption={false} priority={g === 0 && i < 3} lcp={g === 0 && i === 0} />
+            ))}
+          </PlateGrid>
+        </section>
+      ))
     ) : (
       <p class="text-muted mt-10">{ui.collection.empty}</p>
     )}

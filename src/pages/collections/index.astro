@@ -44,7 +44,7 @@ const register = await Promise.all(
                   >
                     <span class="text-muted tabular-nums break-words">{plate.number}</span>
                     <span class="font-ui text-base leading-snug">{plate.data.title}</span>
-                    <span class="text-muted tabular-nums">{plate.data.dateText}</span>
+                    <span class="text-muted tabular-nums">{plate.data.dateText || plate.data.caption}</span>
                     <span class="text-muted">{plate.data.medium}</span>
                   </a>
                 </li>
