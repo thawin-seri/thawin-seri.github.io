@@ -32,7 +32,16 @@ const rows = [
   [ui.label.credit, credit],
 ].filter(([, value]) => value) as [string, string][];
 
-const description = `${title}. ${[caption, medium, dateText].filter(Boolean).join(', ')}.`;
+// The photo's own description, when it has one, makes the better search snippet.
+const note = plate.body
+  ?.replace(/[#*_`>\[\]]/g, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+const description = note
+  ? note.length > 160
+    ? `${note.slice(0, 157).trimEnd()}…`
+    : note
+  : `${title}. ${[caption, medium, dateText].filter(Boolean).join(', ')}.`;
 const abs = (path: string) => new URL(path, Astro.site).href;
 const url = abs(Astro.url.pathname);
 const jsonLd = [

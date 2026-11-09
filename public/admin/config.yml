@@ -1,0 +1,87 @@
+# Sveltia CMS — the editor at /admin.
+# Every save commits to `main`; the Deploy workflow then rebuilds the site (~1–2 min).
+backend:
+  name: github
+  repo: thawin-seri/thawin-seri.github.io
+  branch: main
+  commit_messages:
+    create: 'Add {{collection}} “{{slug}}”'
+    update: 'Edit {{collection}} “{{slug}}”'
+    delete: 'Delete {{collection}} “{{slug}}”'
+    uploadMedia: 'Upload “{{path}}”'
+    deleteMedia: 'Delete “{{path}}”'
+
+site_url: https://thawinseri.com
+display_url: https://thawinseri.com
+
+# Global fallback; each collection below sets its own folder.
+media_folder: src/assets/photos
+
+collections:
+  - name: photos
+    label: Photos
+    label_singular: Photo
+    description: One file per photo. The description shows on the photo’s own page.
+    folder: src/content/objects
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    # Paths in the files are relative to the entry (Astro's image()), e.g.
+    # ../../assets/photos/korat/korat-01.jpg → src/assets/photos/korat/korat-01.jpg
+    media_folder: ../../assets/photos
+    public_folder: ../../assets/photos
+    summary: '{{title}} · {{location}} {{caption}}'
+    sortable_fields: [title, caption, location]
+    view_groups:
+      - label: Album
+        field: collection
+      - label: Country
+        field: caption
+    fields:
+      - { name: title, label: Title, widget: string }
+      - name: body
+        label: Description
+        widget: markdown
+        required: false
+        hint: Shown beside the photo on its page. A sentence or a short paragraph.
+      - { name: image, label: Photo, widget: image }
+      - name: collection
+        label: Album
+        widget: select
+        options:
+          - { label: Asia, value: asia }
+          - { label: North America, value: north-america }
+          - { label: Europe, value: europe }
+      - { name: caption, label: Country, widget: string, hint: 'Label above the photo, e.g. Thailand' }
+      - { name: location, label: City / spot, widget: string, required: false }
+      - { name: medium, label: Medium, widget: string, default: 35mm color film }
+      - { name: dateText, label: Date, widget: string, required: false, hint: 'As printed, e.g. Summer 2024' }
+      - { name: year, label: Year (sorting only), widget: number, value_type: int, required: false }
+      - name: span
+        label: Grid width
+        widget: number
+        value_type: int
+        min: 1
+        max: 2
+        default: 1
+        required: false
+        hint: 1 = normal, 2 = wide
+      - { name: featured, label: Show on home page, widget: boolean, required: false }
+      - { name: draft, label: Hidden (draft), widget: boolean, required: false }
+
+  - name: albums
+    label: Albums
+    label_singular: Album
+    folder: src/content/collections
+    extension: md
+    format: frontmatter
+    create: false
+    delete: false
+    media_folder: ../../assets/photos
+    public_folder: ../../assets/photos
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: description, label: Description, widget: text, hint: 'One paragraph, printed above the album’s photos.' }
+      - { name: order, label: Order, widget: number, value_type: int, required: false }
+      - { name: cover, label: Cover photo, widget: image, required: false }
