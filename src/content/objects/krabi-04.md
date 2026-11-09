@@ -11,3 +11,5 @@ span: 1
 featured: false
 draft: false
 ---
+
+One of the many grad trips.
